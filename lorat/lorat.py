@@ -1,5 +1,5 @@
 
 def main(args = None):
 
-    print("Given arguments1: ", args)
+    print("Given arguments how: ", args)
     print("ok")

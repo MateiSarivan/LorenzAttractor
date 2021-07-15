@@ -24,7 +24,8 @@ setup(
     # },
     # include_package_data=True,
     install_requires=[
-        "pandas"
+        "pandas",
+        "numpy"
     ],
     zip_safe=False,
     keywords="lorat",
