@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-from lorat import lorenz
+import lorenz
 
 def main(args = None):
 
@@ -15,7 +15,7 @@ def main(args = None):
 
     # Generate set of system parameters (timestep, length), (dt, N) 
     #dt = 10.0 ** (-1 * np.arange(5))
-    #N = 5 * 10 ** np.arange(2,7)
+    #N = 5 * 10 ** np.arange(2,7) #create a folder for each of these
     dt = 0.001
     N = 50000
 
@@ -33,6 +33,7 @@ def main(args = None):
     u_total = []
 
     for i in np.arange(len(sigma)):
+        
         x = [1.]; y = [1.]; z = [1.]
         s, t, u = lorenz.euler(x, y, z, sigma[i], ro[i], betta[i], dt, N)
         
@@ -41,15 +42,12 @@ def main(args = None):
         u_total.append(u)
 
 
+    #folder directory
     for i in np.arange(len(s_total)):
-        
-        fig = plt.figure()
-        ax = fig.gca(projection="3d")
-        ax.plot(s_total[i], t_total[i], u_total[i], lw = 0.5)
-        ax.set_xlabel("x")
-        ax.set_ylabel("y")
-        ax.set_zlabel("z")
-        ax.set_title("Lorenz Attractor")
+        graph3D(s_total[i], t_total[i], u_total[i])
+        graph2D(s_total[i], t_total[i], u_total[i])
+        #dump to folder
+
     
     plt.show(block=True)
 
