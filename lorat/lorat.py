@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-import lorenz
+from lorat import lorenz
 
 def main(args = None):
 
@@ -9,7 +9,7 @@ def main(args = None):
     print("ok")
 
     # Set initial conditions
-    x = [1.]; y = [1.]; z = [1.]
+    
     #x = [0]; y = [1]; z = [1.05]
     #x = [1.]; y = [1.05]; z = [0.]
 
@@ -33,15 +33,16 @@ def main(args = None):
     u_total = []
 
     for i in np.arange(len(sigma)):
-        
+        x = [1.]; y = [1.]; z = [1.]
         s, t, u = lorenz.euler(x, y, z, sigma[i], ro[i], betta[i], dt, N)
         
         s_total.append(s)
         t_total.append(t)
         u_total.append(u)
 
-    for i in np.arange(len(s_total)):
 
+    for i in np.arange(len(s_total)):
+        
         fig = plt.figure()
         ax = fig.gca(projection="3d")
         ax.plot(s_total[i], t_total[i], u_total[i], lw = 0.5)
@@ -49,6 +50,8 @@ def main(args = None):
         ax.set_ylabel("y")
         ax.set_zlabel("z")
         ax.set_title("Lorenz Attractor")
+    
+    plt.show(block=True)
 
     plt.subplot(131)
     plt.plot(x,y)
