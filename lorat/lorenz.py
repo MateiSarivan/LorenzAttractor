@@ -21,4 +21,6 @@ def euler(x, y, z, sigma, ro, betta, dt, N):
         y.append(y[i] + dt * x[i] * (ro - z[i]) - dt * y[i])
         z.append(z[i] + dt * x[i] * y[i] - dt * betta * z[i])
         
+    print(len(x))
+
     return x, y, z
