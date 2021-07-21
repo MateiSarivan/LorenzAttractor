@@ -1,0 +1,11 @@
+{
+  "menu_name": "Lorenz Attractor",
+  "menu_items":
+  [
+    {
+      "name": "Lorenz Attractor",
+      "pywscript": "${PYTHON_SCRIPTS}/lorat.py",
+      "workdir": "${USERPROFILE}"
+    }
+  ]
+}

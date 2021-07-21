@@ -1,5 +1,8 @@
+import matplotlib.pyplot as plt
+
 def graph3D(x, y, z):
-    
+    print("x_0: ", x[0], "    y_0:  ", y[0], "    z_0:   ", z[0])
+    print("x_f: ", x[len(x)-1], "    y_f:  ", y[len(x)-1], "    z_f:   ", z[len(x)-1])
     fig = plt.figure()
     ax = fig.gca(projection="3d")
     ax.plot(x, y, z, lw = 0.5)
@@ -8,7 +11,7 @@ def graph3D(x, y, z):
     ax.set_zlabel("z")
     ax.set_title("Lorenz Attractor")
 
-    return
+    
 
 def graph2D(x, y, z):
 
