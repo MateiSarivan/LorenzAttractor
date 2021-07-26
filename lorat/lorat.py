@@ -15,15 +15,15 @@ def main(args = None):
     #x = [1.]; y = [1.05]; z = [0.]
 
     # Generate set of system parameters (timestep, length), (dt, N) 
-    dt = 10.0 ** (-1 * np.arange(2, 5))
+    dt = 10.0 ** (-1 * np.arange(2, 4))
     print(dt)
-    N = 5 * 10 ** np.arange(3,6) #create a folder for each of these
+    N = 5 * 10 ** np.arange(3, 5) #create a folder for each of these
     print(N)
     sigma = [10, 10, 10, 14, 14]
     betta = [8/3, 8/3, 8/3, 8/3, 13/3]
     ro = [6, 16, 28, 28, 28]
 
-    #x, y, z = lorenz.euler(x, y, z, sigma[0], ro[0], betta[0], dt, N)
+    # x, y, z = lorenz.euler(x, y, z, sigma[0], ro[0], betta[0], dt, N)
     # xarray = np.zeros([N, 5])
     # yarray = np.zeros([N, 5])
     # zarray = np.zeros([N, 5])
@@ -47,17 +47,19 @@ def main(args = None):
         solution_space.append(pack)
 
     print(len(solution_space))
+    
+    plotting.graph(solution_space[0][0][i], solution_space[0][1][i], solution_space[0][2][i], solution_space[0][3], solution_space[0][4])
+    
+    # plot_no = 1
+    # for solution in solution_space:
+    #     for i in range(len(solution[2])):
+    #         print("Plot:   ", plot_no, "  :")
+    #         print("dt:   ", solution[3], "    N:  ", solution[4])
+    #         plotting.graph(solution[0][i], solution[1][i], solution[2][i], solution[3], solution[4])
+    #         plot_no += 1
+    #     print("\n")
 
-    plot_no = 1
-    for solution in solution_space:
-        for i in range(len(solution[2])):
-            print("Plot:   ", plot_no, "  :")
-            print("dt:   ", solution[3], "    N:  ", solution[4])
-            plotting.graph3D(solution[0][i], solution[1][i], solution[2][i])
-            plot_no += 1
-        print("\n")
-
-    plt.show()
+    # plt.show()
             
 
     # #folder directory
