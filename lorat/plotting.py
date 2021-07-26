@@ -2,10 +2,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-def graph(x, y, z, dt, N):
+def graph(x, y, z, dt, N, sigma, betta, ro):
     # print("x_0: ", x[0], "    y_0:  ", y[0], "    z_0:   ", z[0])
     # print("x_f: ", x[len(x)-1], "    y_f:  ", y[len(x)-1], "    z_f:   ", z[len(x)-1])
+    
+    # Set figure font   
+    font = {'family' : 'Arial',
+            'size' : '11'}
+    plt.rc('font', **font)
 
+    # Create figure and divide it in sections for 3D and 2D plots
     fig = plt.figure(figsize = (6, 6))
     gs = fig.add_gridspec(ncols=7, nrows=3, wspace=1, hspace = 0.5)
     
@@ -14,7 +20,7 @@ def graph(x, y, z, dt, N):
     yz = fig.add_subplot(gs[1, 4:])
     xz = fig.add_subplot(gs[2, 4:])
     
-    #Determine euclidian distance from one step to the other
+    # Determine euclidian distance from one step to the other
     eucled_3D = 0
     eucled_xy = 0
     eucled_yz = 0
@@ -45,8 +51,9 @@ def graph(x, y, z, dt, N):
         if eucled_xz_nu > eucled_xz:
             eucled_xz = eucled_xz_nu
 
-    print("Euclidian distance is: ", eucled_3D)    
+    #print("Euclidian distance is: ", eucled_3D)    
 
+    # Add data to figure
     s=10
     cmap = plt.cm.viridis
     for i in range(0,N-s,s):
@@ -60,12 +67,13 @@ def graph(x, y, z, dt, N):
         yz.plot(y[i:i+s+1], z[i:i+s+1], color=cmap(eucled_yz_nu/eucled_yz), alpha=0.4)
         xz.plot(x[i:i+s+1], z[i:i+s+1], color=cmap(eucled_xz_nu/eucled_xz), alpha=0.4)
 
+    # Customize 3D plot
     fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_3D), np.max(set_3D)), cmap=cmap), ax=graph3D, orientation = 'horizontal')
     graph3D.set_xlabel("x")
     graph3D.set_ylabel("y")
     graph3D.set_zlabel("z")
-    graph3D.set_title("Lorenz Attractor")
     
+    # Customize each 2D plot
     fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_xy), np.max(set_xy)), cmap=cmap), ax=xy)
     xy.set_xlabel("x")
     xy.set_ylabel("y")
@@ -77,3 +85,15 @@ def graph(x, y, z, dt, N):
     fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_xz), np.max(set_xz)), cmap=cmap), ax=xz)
     xz.set_xlabel("x")
     xz.set_ylabel("z")   
+
+    # Add title for entire figure
+    fig.suptitle("Lorenz Attractor")
+    
+    # Show input data on figure
+    graph3D.set_title("(x, y, z) = (" + str(x[0]) + ", " + str(y[0]) + ", " + str(z[0]) + ")\n" + 
+                      "(" +  r"$\sigma$, " + r"$\beta$, "+ r"$\rho$) = (" + str(sigma) + ", " + str(betta) + ", " + str(ro) + ")\n" + 
+                      "(dt, N) = " + "(" + str(dt) + ", " + str(N) + ")")
+    
+    # Maximize figure
+    manager = plt.get_current_fig_manager()
+    manager.window.showMaximized()
