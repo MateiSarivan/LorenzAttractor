@@ -68,19 +68,42 @@ canvas.mpl_connect("key_press_event", on_key_press)
 
 
 txt = tkinter.StringVar()
-txt.set("dt: = " + str(round(dt[0],4)) + "    N: = " + str(N[0]))
+txt_x = tkinter.StringVar()
+txt_y = tkinter.StringVar()
+txt_z = tkinter.StringVar()
+
+txt.set("dt = " + str(round(dt[0],4)) + "    N = " + str(N[0]))
+txt_x.set("x = " + str(np.round(x[0],3)))
+txt_y.set("y = " + str(np.round(y[0],3)))
+txt_z.set("z = " + str(np.round(z[0],3)))
+
 def update_sc(event):
     print(event)
     txt.set("dt: = " + str(round(dt[int(event)-1],4)) + "    N: = " + str(N[int(event)-1]))
 
+def update_scx(event):
+    print(event)
+    txt_x.set("x = " + str(np.round(x[int(event)], 3)))
 
-scaler = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = update_sc)
+def update_scy(event):
+    print(event)
+    txt_y.set("y = " + str(np.round(y[int(event)], 3)))
+
+def update_scz(event):
+    print(event)
+    txt_z.set("z = " + str(np.round(z[int(event)], 3)))
 
 
-label = tkinter.Label(textvariable = txt, width = 30)
-scaler_2 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20)
-scaler_3 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20)
-scaler_4 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20)
+scaler = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = update_sc, bg='#E3BA7C')
+
+
+label = tkinter.Label(textvariable = txt, width = 25, bg='#E3BA7C')
+label_x = tkinter.Label(textvariable = txt_x, width = 14, bg='#D02A1E')
+label_y = tkinter.Label(textvariable = txt_y, width = 14, bg='#00C753')
+label_z = tkinter.Label(textvariable = txt_z, width = 14, bg='#0CB1F2')
+scaler_2 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = update_scx, bg='#D02A1E')
+scaler_3 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = update_scy, bg='#00C753')
+scaler_4 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = update_scz, bg='#0CB1F2')
 
 
 
@@ -177,14 +200,23 @@ def _save():
     
 
 
-button = tkinter.Button(master=root, text="Save ", command=_save, width = 20)
+button = tkinter.Button(master=root, text="Save ", command=_save, width = 20, bg= '#8DA696')
 
-button.pack(padx = 130, side=tkinter.LEFT)
-label.pack(side = tkinter.LEFT)
-scaler.pack(side=tkinter.LEFT)
-scaler_2.pack(padx = 50, side=tkinter.RIGHT)
-scaler_3.pack(padx = 50, side=tkinter.RIGHT)
-scaler_4.pack(padx = 50, side=tkinter.RIGHT)
+root.geometry('250x200+250+200')
+button.place(x=1450, y=800)
+
+scaler.place(x=1200, y=850)
+label.place(x=1165, y=800)
+
+scaler_2.place(x=1150, y=700)
+label_x.place(x=1150, y=650)
+
+scaler_3.place(x=1350, y=700)
+label_y.place(x=1350, y=650)
+
+scaler_4.place(x=1550, y=700)
+label_z.place(x=1550, y=650)
+
 tkinter.mainloop()
 # If you put root.destroy() here, it will cause an error if the window is
 # closed with the window manager.
