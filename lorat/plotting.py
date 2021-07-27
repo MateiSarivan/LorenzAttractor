@@ -127,7 +127,6 @@ def graph(x, y, z, dt, N, sigma, beta, ro, time_elapsed, file_name = None):
     
 
     if file_name is not None:
-        plt.tight_layout()
         plt.savefig(file_name, dpi=240)
     else:
         manager = plt.get_current_fig_manager()

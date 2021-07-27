@@ -11,6 +11,8 @@ from matplotlib.backend_bases import key_press_handler
 from matplotlib.figure import Figure
 from plotting import graph
 import numpy as np
+from pdf_gen import generate_pdf
+from pdf_merge import merge_pdfs
 
 font = {'family' : 'Arial',
         'size' : '11'}
@@ -25,7 +27,7 @@ y = np.linspace(start = 0.1, stop = 10, num = 100)
 z = np.linspace(start = 0.1, stop = 10, num = 100)
 
 root = tkinter.Tk()
-root.state("zoomed")
+root.geometry("1366x968")
 root.wm_title("Embedding in Tk")
 sigma = [10, 10, 10, 14, 14]
 beta = [8/3, 8/3, 8/3, 8/3, 13/3]
@@ -36,11 +38,11 @@ fig = Figure(figsize=(10, 5), dpi=100)
 t = np.arange(0, 3, .01)
 subplots = []
 
-subplots.append(fig.add_subplot(3, 2, 1, projection = '3d'))
-subplots.append(fig.add_subplot(3, 2, 2, projection = '3d'))
-subplots.append(fig.add_subplot(3, 2, 3, projection = '3d'))
-subplots.append(fig.add_subplot(3, 2, 4, projection = '3d'))
-subplots.append(fig.add_subplot(3, 2, 5, projection = '3d'))
+subplots.append(fig.add_subplot(2, 3, 1, projection = '3d'))
+subplots.append(fig.add_subplot(2, 3, 2, projection = '3d'))
+subplots.append(fig.add_subplot(2, 3, 3, projection = '3d'))
+subplots.append(fig.add_subplot(2, 3, 4, projection = '3d'))
+subplots.append(fig.add_subplot(2, 3, 5, projection = '3d'))
 
 for (subplot, index_s, index_b, index_r) in zip(subplots, sigma, beta_str, ro):
     subplot.set_xlabel('x')
@@ -173,7 +175,7 @@ def _save():
         os.makedirs(experiment_address)
     
     np.save(os.path.join(experiment_address, experiment_name + ".npy"), experiment_data)
-
+    generate_pdf(os.path.join(experiment_address, "gendata" + ".pdf"), experiment_data["init_x"], experiment_data["init_y"], experiment_data["init_z"], experiment_data["N"], experiment_data["dt"], experiment_data["elapsed_time"])
     f = open(os.path.join(experiment_address, experiment_name + ".csv"), 'w', newline="")
     csvw = csv.writer(f, delimiter=",")
     csvw.writerow(["init x", "init y", "init z", "N", "dt", "elapsed_time_total"])
@@ -195,6 +197,9 @@ def _save():
             csvw.writerow([x, y, z])
     f.close()
 
+    merge_pdfs(experiment_address, experiment_name)
+    
+
 
 
     
@@ -202,7 +207,7 @@ def _save():
 
 button = tkinter.Button(master=root, text="Save ", command=_save, width = 20, bg= '#8DA696')
 
-root.geometry('250x200+250+200')
+#root.geometry('250x200+250+200')
 button.place(x=1450, y=800)
 
 scaler.place(x=1200, y=850)
