@@ -12,6 +12,27 @@ def ord(n):
     return str(n)+("th" if 4<=n%100<=20 else {1:"st",2:"nd",3:"rd"}.get(n%10, "th"))
 
 def generate_pdf(file_address, x_0, y_0, z_0, N, dt, elapsed_time):
+    """
+    pdf generator
+
+    Parameters
+    -------
+    
+    file_address : Path
+        Directory for file creation
+    x_0 : List of float
+        Initial value of x.
+    y_0 : List of float
+        Initial value of y.
+    z_0 : List of float
+        Initial value of z.
+    dt: Float
+        Iteration step.
+    N: Float
+        Length of iteration.
+    elapsed_time : Float
+        Time elapsed for parametric analysis
+    """
     canvas = Canvas(file_address, pagesize=A4)
 
     # Set font to Times New Roman with 12-point size

@@ -11,28 +11,33 @@ from matplotlib.backend_bases import key_press_handler
 from matplotlib.figure import Figure
 from plotting import graph
 import numpy as np
+import json
+import fractions
 from pdf_gen import generate_pdf
 from pdf_merge import merge_pdfs
 
 font = {'family' : 'Arial',
         'size' : '11'}
 
+f = open('configuration.json',)
+data = json.load(f)
+
 file_address = None
 experiment_data = {}
 
-N = np.linspace(start = 500, stop = 50000, num = 100, dtype = int)
-dt = np.linspace(start = 0.01, stop = 0.0001, num = 100)
-x = np.linspace(start = 0.1, stop = 10, num = 100)
-y = np.linspace(start = 0.1, stop = 10, num = 100)
-z = np.linspace(start = 0.1, stop = 10, num = 100)
+N = np.linspace(start = data['configuration']['N']['min'], stop = data['configuration']['N']['max'], num = 100, dtype = int)
+dt = np.linspace(start = data['configuration']['dt']['max'], stop = data['configuration']['dt']['min'], num = 100)
+x = np.linspace(start = data['configuration']['x']['min'], stop = data['configuration']['x']['max'], num = 100)
+y = np.linspace(start = data['configuration']['y']['min'], stop = data['configuration']['y']['max'], num = 100)
+z = np.linspace(start = data['configuration']['z']['min'], stop = data['configuration']['z']['max'], num = 100)
 
 root = tkinter.Tk()
 root.geometry("1366x768")
 root.wm_title("Embedding in Tk")
-sigma = [10, 10, 10, 14, 14]
-beta = [8/3, 8/3, 8/3, 8/3, 13/3]
-beta_str = ["8/3", "8/3", "8/3", "8/3", "13/3"] #generate string to be able to show ratio
-ro = [6, 16, 28, 28, 28]
+sigma = np.float_(data['configuration']['sigma'])
+beta = [float(fractions.Fraction(x)) for x in data['configuration']['beta']] #transform beta to float
+beta_str = data['configuration']['beta']
+rho = np.float_(data['configuration']['rho'])
 
 fig = Figure(figsize=(10, 5), dpi=100)
 t = np.arange(0, 3, .01)
@@ -44,7 +49,7 @@ subplots.append(fig.add_subplot(2, 3, 3, projection = '3d'))
 subplots.append(fig.add_subplot(2, 3, 4, projection = '3d'))
 subplots.append(fig.add_subplot(2, 3, 5, projection = '3d'))
 
-for (subplot, index_s, index_b, index_r) in zip(subplots, sigma, beta_str, ro):
+for (subplot, index_s, index_b, index_r) in zip(subplots, sigma, beta_str, rho):
     subplot.set_xlabel('x')
     subplot.set_ylabel('y')
     subplot.set_zlabel('z')
@@ -126,7 +131,7 @@ def updateValue(event):
     
     experiment_data["data"] = []
     time_start = timeit.default_timer()
-    for (sig, r, bet) in zip(sigma, ro, beta):
+    for (sig, r, bet) in zip(sigma, rho, beta):
 
         x_start = [x[value_2]]; y_start = [y[value_3]]; z_start = [z[value_4]]
         sampling_start_time = timeit.default_timer()
@@ -136,7 +141,7 @@ def updateValue(event):
 
     experiment_data["elapsed_time"] = timeit.default_timer() - time_start
 
-    for (subplot, data_set, bstr, sig, r) in zip(subplots, experiment_data["data"], beta_str, sigma, ro):
+    for (subplot, data_set, bstr, sig, r) in zip(subplots, experiment_data["data"], beta_str, sigma, rho):
         subplot.clear()    
         subplot.plot(data_set[0], data_set[1], data_set[2], lw=0.5)
         subplot.set_xlabel('x')
@@ -181,8 +186,8 @@ def _save():
     csvw.writerow(["init x", "init y", "init z", "N", "dt", "elapsed_time_total"])
     csvw.writerow([experiment_data["init_x"], experiment_data["init_y"], experiment_data["init_z"], experiment_data["N"], experiment_data["dt"], experiment_data["elapsed_time"]])
     i = 0
-    for (data_set, s, b, r, bs) in zip(experiment_data["data"], sigma, beta, ro, beta_str):
-        csvw.writerow(["beta", "sigma", "ro", "time_elapsed"])
+    for (data_set, s, b, r, bs) in zip(experiment_data["data"], sigma, beta, rho, beta_str):
+        csvw.writerow(["beta", "sigma", "rho", "time_elapsed"])
         csvw.writerow([s, b, r, data_set[3]])
         csvw.writerow(["x", "y", "z"])
         graph_name = ';'.join([experiment_name,

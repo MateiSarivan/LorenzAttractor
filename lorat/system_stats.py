@@ -8,6 +8,7 @@ import ctypes
 import time
 import timeit
 import statistics
+
 class thread_with_exception(threading.Thread):
     def __init__(self, name):
         threading.Thread.__init__(self)

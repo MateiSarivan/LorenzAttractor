@@ -1,15 +1,15 @@
 import numpy as np
 
 
-def euler(x, y, z, sigma, beta, ro, dt, N):
+def euler(x, y, z, sigma, beta, rho, dt, N):
     
     """
     Finds the coordinates (x, y, z) for the Lorenz attractor by solving a system of three equations dependent on
-    sigma, beta, ro and time using the finite-difference method (Euler). 
+    sigma, beta, rho and time using the finite-difference method (Euler). 
          
         x[n+1] = x[n] + dt * sigma * (y[n] - x[n])
 
-        y[n+1] = y[n] + dt * x[n] * (ro - z[n]) - dt * y[n]
+        y[n+1] = y[n] + dt * x[n] * (rho - z[n]) - dt * y[n]
 
         z[n+1] = z[n] + dt * x[n] * y[n] - dt * beta * z[n]
         
@@ -35,7 +35,7 @@ def euler(x, y, z, sigma, beta, ro, dt, N):
         Value of sigma. Example values: 10, or 14.    
     beta: Float, optional
         Value of beta. Example values: 8/3 or 13/3.
-    ro: Float, optional
+    rho: Float, optional
         Value of ro. Example values: 6, 16, or 28.
 
     dt: Float, optional
@@ -54,14 +54,14 @@ def euler(x, y, z, sigma, beta, ro, dt, N):
 
     Example
     -------
-    >>> euler(x=[1], y=[1], z=[1], sigma=10, beta=8/3, ro=28, dt=0.01, N=3)
+    >>> euler(x=[1], y=[1], z=[1], sigma=10, beta=8/3, rho=28, dt=0.01, N=3)
     ([1, 1.0, 1.026], [1, 1.26, 1.518], [1, 0.983, 0.969])
     
     """
     
     for i in np.arange(0, N-1):
         x.append(round(x[i] + dt * sigma * (y[i] - x[i]),3))
-        y.append(round(y[i] + dt * x[i] * (ro - z[i]) - dt * y[i], 3))
+        y.append(round(y[i] + dt * x[i] * (rho - z[i]) - dt * y[i], 3))
         z.append(round(z[i] + dt * x[i] * y[i] - dt * beta * z[i], 3))
 
     return x, y, z
