@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-def graph(x, y, z, dt, N, sigma, betta, ro):
+def graph(x, y, z, dt, N, sigma, betta, ro, time_elapsed, file_name = None):
     # print("x_0: ", x[0], "    y_0:  ", y[0], "    z_0:   ", z[0])
     # print("x_f: ", x[len(x)-1], "    y_f:  ", y[len(x)-1], "    z_f:   ", z[len(x)-1])
     
@@ -12,7 +12,8 @@ def graph(x, y, z, dt, N, sigma, betta, ro):
     plt.rc('font', **font)
 
     # Create figure and divide it in sections for 3D and 2D plots
-    fig = plt.figure(figsize = (6, 6))
+    fig = plt.figure(figsize = (10, 8))
+    fig.set_tight_layout(True)
     gs = fig.add_gridspec(ncols=7, nrows=3, wspace=1, hspace = 0.5)
     
     graph3D = fig.add_subplot(gs[0:, :3], projection='3d')
@@ -92,8 +93,15 @@ def graph(x, y, z, dt, N, sigma, betta, ro):
     # Show input data on figure
     graph3D.set_title("(x, y, z) = (" + str(x[0]) + ", " + str(y[0]) + ", " + str(z[0]) + ")\n" + 
                       "(" +  r"$\sigma$, " + r"$\beta$, "+ r"$\rho$) = (" + str(sigma) + ", " + str(betta) + ", " + str(ro) + ")\n" + 
-                      "(dt, N) = " + "(" + str(dt) + ", " + str(N) + ")")
+                      "(dt, N) = " + "(" + str(dt) + ", " + str(N) + ")"
+                      "\nElapsed coordinates computation time: " + str(time_elapsed))
     
     # Maximize figure
-    manager = plt.get_current_fig_manager()
-    manager.window.showMaximized()
+    
+
+    if file_name is not None:
+        plt.tight_layout()
+        plt.savefig(file_name, dpi=240)
+    else:
+        manager = plt.get_current_fig_manager()
+        manager.window.showMaximized()
