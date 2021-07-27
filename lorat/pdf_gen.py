@@ -41,8 +41,16 @@ canvas.setFillColor(black)
 canvas.drawString(2.5 * cm, (27-4.5) * cm, "The following parameters were selected for the experiment:")
 canvas.drawString(3.5 * cm, (27-5.5) * cm, "1.  Constants:")
 canvas.drawString(4.5 * cm, (27-6.5) * cm, "σ = " + str(4324))
-canvas.drawString(4.5 * cm, (27-6.5) * cm, "β = " + str(4324))
-canvas.drawString(4.5 * cm, (27-6.5) * cm, "ρ = " + str(4324))
+canvas.drawString(4.5 * cm, (27-7.5) * cm, "β = " + str(4324))
+canvas.drawString(4.5 * cm, (27-8.5) * cm, "ρ = " + str(4324))
+canvas.drawString(3.5 * cm, (27-9.5) * cm, "2.  Initial Conditions:")
+canvas.drawString(4.5 * cm, (27-10.5) * cm, "x = " + str(4324))
+textobject = canvas.beginText(4.8 * cm, (27-10.5), "1")
+help(textobject.setRise())
+textobject.setRise(1)
+canvas.drawText(textobject)
+canvas.drawString(4.5 * cm, (27-11.5) * cm, "y = " + str(4324))
+canvas.drawString(4.5 * cm, (27-12.5) * cm, "z = " + str(4324))
 
 
 # Save the PDF file

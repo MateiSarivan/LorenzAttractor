@@ -1,5 +1,5 @@
 import numpy as np
-import timeit
+
 
 def euler(x, y, z, sigma, beta, ro, dt, N):
     
@@ -59,14 +59,11 @@ def euler(x, y, z, sigma, beta, ro, dt, N):
     
     """
     
-    time_start = timeit.default_timer()
     for i in np.arange(0, N-1):
-
         x.append(round(x[i] + dt * sigma * (y[i] - x[i]),3))
         y.append(round(y[i] + dt * x[i] * (ro - z[i]) - dt * y[i], 3))
         z.append(round(z[i] + dt * x[i] * y[i] - dt * beta * z[i], 3))
-        
-    time_elapsed = timeit.default_timer()-time_start
+
     return x, y, z
 
 if __name__== '__main__':

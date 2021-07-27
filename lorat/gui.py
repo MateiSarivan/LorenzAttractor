@@ -104,7 +104,10 @@ def updateValue(event):
     for (sig, r, bet) in zip(sigma, ro, betta):
 
         x_start = [x[value_2]]; y_start = [y[value_3]]; z_start = [z[value_4]]
-        experiment_data["data"].append(lorenz.euler(x_start, y_start, z_start, sig, r, bet, dt[value], N[value]))
+        sampling_start_time = timeit.default_timer()
+        x_sampled, y_sampled, z_sampled = lorenz.euler(x_start, y_start, z_start, sig, bet, r, dt[value], N[value])
+        sampling_time = timeit.default_timer() - sampling_start_time
+        experiment_data["data"].append([x_sampled, y_sampled, z_sampled, sampling_time])
 
     experiment_data["elapsed_time"] = timeit.default_timer() - time_start
 
@@ -153,7 +156,7 @@ def _save():
     csvw.writerow(["init x", "init y", "init z", "N", "dt", "elapsed_time_total"])
     csvw.writerow([experiment_data["init_x"], experiment_data["init_y"], experiment_data["init_z"], experiment_data["N"], experiment_data["dt"], experiment_data["elapsed_time"]])
     i = 0
-    for (data_set, s, b, r) in zip(experiment_data["data"], sigma, betta, ro):
+    for (data_set, s, b, r, bs) in zip(experiment_data["data"], sigma, betta, ro, beta_str):
         csvw.writerow(["beta", "sigma", "ro", "time_elapsed"])
         csvw.writerow([s, b, r, data_set[3]])
         csvw.writerow(["x", "y", "z"])
@@ -163,8 +166,8 @@ def _save():
             "R=" + str(i)
         ])
         i += 1
-        graph(data_set[0], data_set[1], data_set[2], experiment_data["dt"], int(experiment_data["N"]), s, b, r, data_set[3], os.path.join(experiment_address, graph_name + ".png"))
-        graph(data_set[0], data_set[1], data_set[2], experiment_data["dt"], int(experiment_data["N"]), s, b, r, data_set[3], os.path.join(experiment_address, graph_name + ".pdf"))
+        graph(data_set[0], data_set[1], data_set[2], experiment_data["dt"], int(experiment_data["N"]), s, bs, r, data_set[3], os.path.join(experiment_address, graph_name + ".png"))
+        graph(data_set[0], data_set[1], data_set[2], experiment_data["dt"], int(experiment_data["N"]), s, bs, r, data_set[3], os.path.join(experiment_address, graph_name + ".pdf"))
         for (x, y, z) in zip(data_set[0], data_set[1], data_set[2]):
             csvw.writerow([x, y, z])
     f.close()
