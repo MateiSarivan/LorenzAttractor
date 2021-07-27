@@ -128,7 +128,9 @@ def updateValue(event):
     experiment_data["init_z"] = z[value_4]
     experiment_data["dt"] = dt[value]
     experiment_data["N"] = N[value]
-    
+    experiment_data["beta"] = beta
+    experiment_data["sigma"] = sigma
+    experiment_data["rho"] = rho
     experiment_data["data"] = []
     time_start = timeit.default_timer()
     for (sig, r, bet) in zip(sigma, rho, beta):
