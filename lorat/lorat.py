@@ -43,16 +43,16 @@ def main(args = None):
 
         solution_space.append(pack)
     
-    plotting.graph(solution_space[0][0][i], solution_space[0][1][i], solution_space[0][2][i], solution_space[0][3], solution_space[0][4], sigma[0], beta_str[0], ro[0], time_elapsed=0, file_name = None)
+    #plotting.graph(solution_space[0][0][i], solution_space[0][1][i], solution_space[0][2][i], solution_space[0][3], solution_space[0][4], sigma[0], beta_str[0], ro[0], time_elapsed=0, file_name = None)
     
-    # Generate plots for each group of data (x, y, z) depending on (sigma, beta, ro) and (dt, N)
-    # plot_no = 1
-    # for solution in solution_space:
-    #     for i in range(len(solution[2])):
-    #         print("Plot:   ", plot_no, "  :")
-    #         print("dt:   ", solution[3], "    N:  ", solution[4])
-    #         plotting.graph(solution[0][i], solution[1][i], solution[2][i], solution[3], solution[4], sigma[i], beta[i], ro[i], time_elapsed=0, file_name = None)
-    #         plot_no += 1
-    #     print("\n")            
+    Generate plots for each group of data (x, y, z) depending on (sigma, beta, ro) and (dt, N)
+    plot_no = 1
+    for solution in solution_space:
+        for i in range(len(solution[2])):
+            print("Plot:   ", plot_no, "  :")
+            print("dt:   ", solution[3], "    N:  ", solution[4])
+            plotting.graph(solution[0][i], solution[1][i], solution[2][i], solution[3], solution[4], sigma[i], beta[i], ro[i], time_elapsed=0, file_name = None)
+            plot_no += 1
+        print("\n")            
     
     plt.show(block=True)
