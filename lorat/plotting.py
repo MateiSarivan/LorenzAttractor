@@ -2,9 +2,36 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-def graph(x, y, z, dt, N, sigma, betta, ro, time_elapsed, file_name = None):
-    # print("x_0: ", x[0], "    y_0:  ", y[0], "    z_0:   ", z[0])
-    # print("x_f: ", x[len(x)-1], "    y_f:  ", y[len(x)-1], "    z_f:   ", z[len(x)-1])
+def graph(x, y, z, dt, N, sigma, beta, ro, time_elapsed, file_name = None):
+
+    """
+    Generates 3D and 2D plots of the Lorenz attractor.
+
+    Parameters
+    -------
+    x : List of float
+        List of x coordinates of the Lorenz attractor.
+    y : List of float
+        List of y coordinates of the Lorenz attractor.
+    z : List of float
+        List of z coordinates of the Lorenz attractor.
+
+    dt: Float, optional
+        Iteration step. Example value: 0.01.
+    N: Float, optional
+        Length of iteration. Example value: 50000.
+    sigma: Float
+        Value of sigma. Example values: 10, or 14.    
+    beta: Float
+        Value of beta. Example values: 8/3 or 13/3.
+    ro: Float
+        Value of ro. Example values: 6, 16, or 28.
+    time_elapsed: Float
+        Time elapsed for solving the Lorenz attractor
+    file_name: None, optional
+        The name of the file when saved.
+
+    """
     
     # Set figure font   
     font = {'family' : 'Arial',
@@ -69,21 +96,21 @@ def graph(x, y, z, dt, N, sigma, betta, ro, time_elapsed, file_name = None):
         xz.plot(x[i:i+s+1], z[i:i+s+1], color=cmap(eucled_xz_nu/eucled_xz), alpha=0.4)
 
     # Customize 3D plot
-    fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_3D), np.max(set_3D)), cmap=cmap), ax=graph3D, orientation = 'horizontal')
+    fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_3D), np.max(set_3D)), cmap=cmap), ax=graph3D, orientation = 'horizontal', label='Euclidian distance')
     graph3D.set_xlabel("x")
     graph3D.set_ylabel("y")
     graph3D.set_zlabel("z")
     
     # Customize each 2D plot
-    fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_xy), np.max(set_xy)), cmap=cmap), ax=xy)
+    fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_xy), np.max(set_xy)), cmap=cmap), ax=xy, label='Euclidian distance')
     xy.set_xlabel("x")
     xy.set_ylabel("y")
 
-    fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_yz), np.max(set_yz)), cmap=cmap), ax=yz)
+    fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_yz), np.max(set_yz)), cmap=cmap), ax=yz, label='Euclidian distance')
     yz.set_xlabel("y")
     yz.set_ylabel("z")
 
-    fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_xz), np.max(set_xz)), cmap=cmap), ax=xz)
+    fig.colorbar(mpl.cm.ScalarMappable(norm=mpl.colors.Normalize(np.min(set_xz), np.max(set_xz)), cmap=cmap), ax=xz, label='Euclidian distance')
     xz.set_xlabel("x")
     xz.set_ylabel("z")   
 
@@ -92,7 +119,7 @@ def graph(x, y, z, dt, N, sigma, betta, ro, time_elapsed, file_name = None):
     
     # Show input data on figure
     graph3D.set_title("(x, y, z) = (" + str(x[0]) + ", " + str(y[0]) + ", " + str(z[0]) + ")\n" + 
-                      "(" +  r"$\sigma$, " + r"$\beta$, "+ r"$\rho$) = (" + str(sigma) + ", " + str(betta) + ", " + str(ro) + ")\n" + 
+                      "(" +  r"$\sigma$, " + r"$\beta$, "+ r"$\rho$) = (" + str(sigma) + ", " + str(beta) + ", " + str(ro) + ")\n" + 
                       "(dt, N) = " + "(" + str(dt) + ", " + str(N) + ")"
                       "\nElapsed coordinates computation time: " + str(time_elapsed))
     

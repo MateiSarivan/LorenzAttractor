@@ -28,7 +28,7 @@ root = tkinter.Tk()
 root.state("zoomed")
 root.wm_title("Embedding in Tk")
 sigma = [10, 10, 10, 14, 14]
-betta = [8/3, 8/3, 8/3, 8/3, 13/3]
+beta = [8/3, 8/3, 8/3, 8/3, 13/3]
 beta_str = ["8/3", "8/3", "8/3", "8/3", "13/3"] #generate string to be able to show ratio
 ro = [6, 16, 28, 28, 28]
 
@@ -101,7 +101,7 @@ def updateValue(event):
     
     experiment_data["data"] = []
     time_start = timeit.default_timer()
-    for (sig, r, bet) in zip(sigma, ro, betta):
+    for (sig, r, bet) in zip(sigma, ro, beta):
 
         x_start = [x[value_2]]; y_start = [y[value_3]]; z_start = [z[value_4]]
         sampling_start_time = timeit.default_timer()
@@ -156,7 +156,7 @@ def _save():
     csvw.writerow(["init x", "init y", "init z", "N", "dt", "elapsed_time_total"])
     csvw.writerow([experiment_data["init_x"], experiment_data["init_y"], experiment_data["init_z"], experiment_data["N"], experiment_data["dt"], experiment_data["elapsed_time"]])
     i = 0
-    for (data_set, s, b, r, bs) in zip(experiment_data["data"], sigma, betta, ro, beta_str):
+    for (data_set, s, b, r, bs) in zip(experiment_data["data"], sigma, beta, ro, beta_str):
         csvw.writerow(["beta", "sigma", "ro", "time_elapsed"])
         csvw.writerow([s, b, r, data_set[3]])
         csvw.writerow(["x", "y", "z"])

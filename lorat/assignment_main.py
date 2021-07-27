@@ -15,17 +15,17 @@ dt = 0.001
 N = 50000
 
 sigma = [10, 10, 10, 14, 14]
-betta = [8/3, 8/3, 8/3, 8/3, 13/3]
+beta = [8/3, 8/3, 8/3, 8/3, 13/3]
 ro = [6, 16, 28, 28, 28]
 
-x, y, z = lorenz.euler(x, y, z, sigma[0], ro[0], betta[0], dt, N)
+x, y, z = lorenz.euler(x, y, z, sigma[0], ro[0], beta[0], dt, N)
 # xarray = np.zeros([N, 5])
 # yarray = np.zeros([N, 5])
 # zarray = np.zeros([N, 5])
 
 
 # for i in np.arange(len(sigma)):
-#     s, t, u = lorenz.euler(x, y, z, sigma[i], ro[i], betta[i], dt, N)
+#     s, t, u = lorenz.euler(x, y, z, sigma[i], ro[i], beta[i], dt, N)
 
 
     
