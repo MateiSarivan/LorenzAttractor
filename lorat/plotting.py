@@ -40,7 +40,7 @@ def graph(x, y, z, dt, N, sigma, beta, ro, time_elapsed, file_name = None):
 
     # Create figure and divide it in sections for 3D and 2D plots
     fig = plt.figure(figsize = (10, 8))
-    fig.set_tight_layout(True)
+    #fig.set_tight_layout(True)
     gs = fig.add_gridspec(ncols=7, nrows=3, wspace=1, hspace = 0.5)
     
     graph3D = fig.add_subplot(gs[0:, :3], projection='3d')

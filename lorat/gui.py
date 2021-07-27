@@ -27,7 +27,7 @@ y = np.linspace(start = 0.1, stop = 10, num = 100)
 z = np.linspace(start = 0.1, stop = 10, num = 100)
 
 root = tkinter.Tk()
-root.geometry("1366x968")
+root.geometry("1366x768")
 root.wm_title("Embedding in Tk")
 sigma = [10, 10, 10, 14, 14]
 beta = [8/3, 8/3, 8/3, 8/3, 13/3]
@@ -208,19 +208,19 @@ def _save():
 button = tkinter.Button(master=root, text="Save ", command=_save, width = 20, bg= '#8DA696')
 
 #root.geometry('250x200+250+200')
-button.place(x=1450, y=800)
+button.place(x=1550, y=750)
 
-scaler.place(x=1200, y=850)
-label.place(x=1165, y=800)
+scaler.place(x=1320, y=800)
+label.place(x=1275, y=750)
 
-scaler_2.place(x=1150, y=700)
-label_x.place(x=1150, y=650)
+scaler_2.place(x=1250, y=650)
+label_x.place(x=1250, y=600)
 
-scaler_3.place(x=1350, y=700)
-label_y.place(x=1350, y=650)
+scaler_3.place(x=1450, y=650)
+label_y.place(x=1450, y=600)
 
-scaler_4.place(x=1550, y=700)
-label_z.place(x=1550, y=650)
+scaler_4.place(x=1650, y=650)
+label_z.place(x=1650, y=600)
 
 tkinter.mainloop()
 # If you put root.destroy() here, it will cause an error if the window is
