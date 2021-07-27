@@ -25,7 +25,7 @@ def main(args = None):
     
     # Generate solutions for all values of sigma, beta, and ro for (x, y, z) with given dt and N
     solution_space = []
-    
+
     for j in range(len(dt)):
         s_total = []
         t_total = []
@@ -34,7 +34,7 @@ def main(args = None):
         for i in np.arange(len(sigma)):
             
             x = [1.]; y = [1.]; z = [1.]
-            s, t, u = lorenz.euler(x, y, z, sigma[i], ro[i], beta[i], dt[j], N[j])
+            s, t, u = lorenz.euler(x, y, z, sigma[i], beta[i], ro[i], dt[j], N[j])
             
             s_total.append(s)
             t_total.append(t)
