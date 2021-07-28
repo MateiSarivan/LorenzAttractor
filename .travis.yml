@@ -17,7 +17,7 @@ install:
   - conda install matplotlib
   - conda install -c conda-forge pypdf2
   - conda install -c conda-forge reportlab
-  - python setup.py install
+  - python setup.py -q install
 
 script:
   - pytest
