@@ -1,6 +1,10 @@
-![PyTest](https://github.com/MateiSarivan/LorenzAttractor/actions/workflows/lorat.yml/badge.svg)
+<a href="">
+    <img src="./img/loop_alpha.png" alt="LorenzAttractor logo" title="Lorat" align="right" height="60" />
+</a>
 
 # LorenzAttractor
+
+![PyTest](https://github.com/MateiSarivan/LorenzAttractor/actions/workflows/lorat.yml/badge.svg)
 
 # Installation
 
