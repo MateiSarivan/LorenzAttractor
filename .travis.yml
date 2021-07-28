@@ -5,9 +5,7 @@ python:
 
 before_install:
   - "pip install -U pip"
-  - "export PYTHONPATH=$PYTHONPATH:$(pwd)"
-  - python setup.py -q install --user
-  - pip install .
+  - python setup.py install
 
 install:
   # Install Anaconda
