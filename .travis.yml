@@ -18,6 +18,7 @@ install:
   - conda install -c conda-forge pypdf2
   - conda install -c conda-forge reportlab
   - python setup.py -q install --user
+  - pip install .
 
 script:
   - pytest
