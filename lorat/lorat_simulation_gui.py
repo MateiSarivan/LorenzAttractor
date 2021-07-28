@@ -23,7 +23,7 @@ class LoratGUI:
         self.file_address = None
         self.experiment_data = {}
         dir_path = os.path.dirname(os.path.realpath(__file__))
-        json_file = open(os.path.join(dir_path, 'configuration.json'))
+        json_file = open(os.path.join(dir_path, 'json', 'configuration.json'))
         data = json.load(json_file)
         self.range_N = np.linspace(start = data['configuration']['N']['min'], stop = data['configuration']['N']['max'], num = 100, dtype = int)
         self.range_dt = np.linspace(start = data['configuration']['dt']['max'], stop = data['configuration']['dt']['min'], num = 100)

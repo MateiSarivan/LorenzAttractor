@@ -12,11 +12,11 @@ class LoratExplorerGUI:
         self.experiment = {}
         self.button_state = False
         
-        root = tkinter.Tk()
-        root.geometry("450x300")
+        self.root = tkinter.Tk()
+        self.root.geometry("450x300")
 
-        frame_1 = Frame(root)
-        frame_2 = Frame(root)
+        frame_1 = Frame(self.root)
+        frame_2 = Frame(self.root)
         frame_3 = Frame(frame_2)
 
         self.txt_x_initial = tkinter.StringVar()
@@ -59,11 +59,11 @@ class LoratExplorerGUI:
         self.listbox.pack(side = RIGHT, fill = BOTH)
         
         # Creating a Scrollbar and 
-        # attaching it to root window
+        # attaching it to self.root window
         scrollbar = Scrollbar(frame_1)
         
         # Adding Scrollbar to the right
-        # side of root window
+        # side of self.root window
         scrollbar.pack(side = LEFT, fill = BOTH)
         
         # Insert elements into the self.listbox
@@ -80,8 +80,8 @@ class LoratExplorerGUI:
 
         frame_1.pack(side = LEFT, fill="y")
 
-        root.after(100, self.get_address)
-        root.mainloop()
+        self.root.after(100, self.get_address)
+        self.root.mainloop()
 
 
     def _plot(self):
@@ -141,7 +141,7 @@ class LoratExplorerGUI:
         self.file_address = tkinter.filedialog.askdirectory()
         if "LoratResults" not in self.file_address:
 
-            root.quit()
+            self.root.quit()
         else:
             experiments_names = os.listdir(self.file_address)
             for experiment_name in experiments_names:

@@ -13,6 +13,10 @@ setup(
     package_dir={
         "lorat":"lorat"
         },
+    package_data = {
+        "lorat": ["json/*"
+        ]
+    },
     entry_points={
         "console_scripts": [
             "lorat-simulation=lorat.__init__:lorat_simulation",
