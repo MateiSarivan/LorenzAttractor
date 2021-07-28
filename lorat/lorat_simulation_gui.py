@@ -4,6 +4,7 @@ import timeit
 import csv
 import json
 import fractions
+import uuid
 import numpy as np
 
 from matplotlib.backends.backend_tkagg import (
@@ -198,13 +199,15 @@ class LoratGUI:
 
         if len(self.file_address):
 
-            experiment_name = ';'.join([
-                "N=" + str(self.scaler_N.get()),
-                "dt=" + str(self.scaler_dt.get()),
-                "x=" + str(self.scaler_2.get()),
-                "y=" + str(self.scaler_3.get()),
-                "z=" + str(self.scaler_3.get())
-            ])
+            # experiment_name = ';'.join([
+            #     "N=" + str(self.scaler_N.get()),
+            #     "dt=" + str(self.scaler_dt.get()),
+            #     "x=" + str(self.scaler_2.get()),
+            #     "y=" + str(self.scaler_3.get()),
+            #     "z=" + str(self.scaler_3.get())
+            # ])
+
+            experiment_name = str(uuid.uuid1())[:16]
             experiment_address = os.path.join(self.file_address, experiment_name)
             if not os.path.exists(experiment_address):
                 os.makedirs(experiment_address)
