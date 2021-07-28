@@ -61,7 +61,8 @@ def generate_pdf(file_address, x_0, y_0, z_0, N, dt, elapsed_time):
     canvas.drawString(7.7 * cm, (27-3.5) * cm, time_string)
 
     canvas.setFillColor(black)
-    with open("configuration.json") as f:
+    json_file = open(os.path.join(dir_path, 'configuration.json'))
+    with open(json_file) as f:
         conf = json.load(f)
         beta = conf['configuration']['beta']
         sigma = conf['configuration']['sigma']
