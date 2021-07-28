@@ -1,3 +1,2 @@
 lorat.egg-info/
-lorat/__pycache__/lorat.cpython-38.pyc
-lorat/__pycache__/lorenz.cpython-38.pyc
+*.pyc
