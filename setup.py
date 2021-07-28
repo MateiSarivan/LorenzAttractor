@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="lorat",
@@ -7,9 +7,7 @@ setup(
     long_description="Lorenz attractor implementation",
     author="Ioan-Matei Sarivan",
     author_email="ioanms@mp.aau.dk",
-    packages=[
-        "lorat"
-    ],
+    packages=find_packages(),
     package_dir={
         "lorat":"lorat"
         },
