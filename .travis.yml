@@ -13,5 +13,8 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
 
+script:
+  - pytest
+
 after_success:
   - conda install conda-build && conda install anaconda-client && bash conda/conda_upload.sh
