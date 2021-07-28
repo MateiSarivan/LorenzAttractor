@@ -1,4 +1,4 @@
-![PyTest](https://github.com/MateiSarivan/LorenzAttractor/actions/workflows/lorat.yml/badge.svg)
+![PyTest](https://github.com/MateiSarivan/LorenzAttractor/actions/workflows/lorat.yml)
 
 # LorenzAttractor
 
