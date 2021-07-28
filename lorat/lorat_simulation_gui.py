@@ -1,6 +1,5 @@
 import os
 import tkinter
-import lorenz
 import timeit
 import csv
 import json
@@ -12,17 +11,18 @@ from matplotlib.backends.backend_tkagg import (
 from matplotlib.backend_bases import key_press_handler
 from matplotlib.figure import Figure
 
-from plotting import graph
-from pdf_gen import generate_pdf
-from pdf_merge import merge_pdfs
+from lorat.lorenz import euler
+from lorat.plotting import graph
+from lorat.pdf_gen import generate_pdf
+from lorat.pdf_merge import merge_pdfs
 
-class LorenzGUI:
+class LoratGUI:
     def __init__(self):
         
         self.file_address = None
         self.experiment_data = {}
-
-        json_file = open('configuration.json',)
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        json_file = open(os.path.join(dir_path, 'configuration.json'))
         data = json.load(json_file)
         self.range_N = np.linspace(start = data['configuration']['N']['min'], stop = data['configuration']['N']['max'], num = 100, dtype = int)
         self.range_dt = np.linspace(start = data['configuration']['dt']['max'], stop = data['configuration']['dt']['min'], num = 100)
@@ -154,7 +154,7 @@ class LorenzGUI:
 
             x_start = [self.range_initial_x[value_2]]; y_start = [self.range_initial_y[value_3]]; z_start = [self.range_initial_z[value_4]]
             sampling_start_time = timeit.default_timer()
-            x_sampled, y_sampled, z_sampled = lorenz.euler(x_start, y_start, z_start, sig, bet, r, self.range_dt[value], self.range_N[value])
+            x_sampled, y_sampled, z_sampled = euler(x_start, y_start, z_start, sig, bet, r, self.range_dt[value], self.range_N[value])
             sampling_time = timeit.default_timer() - sampling_start_time
             self.experiment_data["data"].append([x_sampled, y_sampled, z_sampled, sampling_time])
 
@@ -218,5 +218,3 @@ class LorenzGUI:
             f.close()
 
             merge_pdfs(experiment_address, experiment_name)
-            
-LorenzGUI()

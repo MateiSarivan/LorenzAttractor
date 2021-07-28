@@ -1,11 +1,9 @@
-import sys
-from lorat.lorat import main
+from lorat.lorat_simulation_gui import LoratGUI
+from lorat.lorat_explorer_gui import LoratExplorerGUI
 
 
+def lorat_simulation():
+    LoratGUI()
 
-if __name__ == '__main__':
-
-    if len(sys.argv) > 1:
-        main(sys.argv[1])
-    else:
-        main()
+def lorat_explorer():
+    LoratExplorerGUI()

@@ -15,7 +15,8 @@ setup(
         },
     entry_points={
         "console_scripts": [
-            "lorat=lorat.__init__:main"
+            "lorat-simulation=lorat.__init__:lorat_simulation",
+            "lorat-explorer=lorat.__init__:lorat_explorer"
         ]
     },
     # package_data={
