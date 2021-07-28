@@ -1,6 +1,6 @@
 package:
   name: lorat
-  version: 0.0.1
+  version: 0.0.6
 
 source:
   path: ../
@@ -15,10 +15,16 @@ requirements:
 
   run:
     - python
+    - setuptools
     - numpy
+    - matplotlib
+    - reportlab
+    - pypdf2
+    - psutil
 
   entry_points:
-    - lorat = lorat.__init__:main
+    - lorat-simulation = lorat.__init__:lorat-simulation
+    - lorat-explorer = lorat.__init__:lorat-explorer
 
 about:
   summary: This is a simple meta-package
