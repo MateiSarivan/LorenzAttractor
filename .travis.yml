@@ -3,7 +3,7 @@ python:
   - "3.8"
   - "3.9"
 
-os: windows-latest
+os: windows
 
 install:
   # Install Anaconda
