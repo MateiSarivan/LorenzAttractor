@@ -3,6 +3,12 @@ python:
   - "3.8"
   - "3.9"
 
+before_install:
+  - "pip install -U pip"
+  - "export PYTHONPATH=$PYTHONPATH:$(pwd)"
+  - python setup.py -q install --user
+  - pip install .
+
 install:
   # Install Anaconda
   - wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
@@ -17,8 +23,7 @@ install:
   - conda install matplotlib
   - conda install -c conda-forge pypdf2
   - conda install -c conda-forge reportlab
-  - python setup.py -q install --user
-  - pip install .
+
 
 script:
   - pytest
