@@ -2,7 +2,8 @@
 
 # Installation
 
-1) a) In an anaconda terminal execute (you may want to use a virtual environment <see b)>):
+1. 
+a) In an anaconda terminal execute (you may want to use a virtual environment <see b)>):
 
     >conda install -c mateisarivan -c conda-forge lorat
 
@@ -14,7 +15,8 @@ b) To cleanly remove the installed package use:
 
 or 
 
-2) Clone git repository MateiSarivan/LorenzAttractor using
+2. 
+Clone git repository MateiSarivan/LorenzAttractor using
 
     >git clone https://github.com/MateiSarivan/LorenzAttractor.git
 
