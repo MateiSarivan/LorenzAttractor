@@ -69,20 +69,24 @@ class LoratGUI:
 
         self.canvas.mpl_connect("key_press_event", on_key_press)
 
-        self.txt_N_dt = tkinter.StringVar()
+        self.txt_N = tkinter.StringVar()
+        self.txt_dt = tkinter.StringVar()
         self.txt_x = tkinter.StringVar()
         self.txt_y = tkinter.StringVar()
         self.txt_z = tkinter.StringVar()
 
-        self.txt_N_dt.set("dt = " + str(round(self.range_dt[0],4)) + "    N = " + str(self.range_N[0]))
+        self.txt_N.set("N = " + str(self.range_N[0]))
+        self.txt_dt.set("dt = " + str(round(self.range_dt[0],4)))
         self.txt_x.set("x = " + str(np.round(self.range_initial_x[0],3)))
         self.txt_y.set("y = " + str(np.round(self.range_initial_y[0],3)))
         self.txt_z.set("z = " + str(np.round(self.range_initial_z[0],3)))
 
-        self.scaler_dt_N = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_sc, bg='#E3BA7C')
+        self.scaler_dt = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_sc_dt, bg='#BFBFBF')
+        self.scaler_N = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_sc_N, bg='#E3BA7C')
         
 
-        label = tkinter.Label(textvariable = self.txt_N_dt, width = 25, bg='#E3BA7C')
+        label_N = tkinter.Label(textvariable = self.txt_N, width = 14, bg='#E3BA7C')
+        label_dt = tkinter.Label(textvariable = self.txt_dt, width = 14, bg='#BFBFBF')
         label_x = tkinter.Label(textvariable = self.txt_x, width = 14, bg='#D02A1E')
         label_y = tkinter.Label(textvariable = self.txt_y, width = 14, bg='#00C753')
         label_z = tkinter.Label(textvariable = self.txt_z, width = 14, bg='#0CB1F2')
@@ -91,35 +95,44 @@ class LoratGUI:
         self.scaler_4 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_scz, bg='#0CB1F2')
 
 
-        self.scaler_dt_N.bind("<ButtonRelease-1>", self.updateValue)
+        self.scaler_N.bind("<ButtonRelease-1>", self.updateValue)
+        self.scaler_dt.bind("<ButtonRelease-1>", self.updateValue)
+
         self.scaler_2.bind("<ButtonRelease-1>", self.updateValue)
         self.scaler_3.bind("<ButtonRelease-1>", self.updateValue)
         self.scaler_4.bind("<ButtonRelease-1>", self.updateValue)
 
-        button = tkinter.Button(master=root, text="Save ", command=self._save, width = 20, bg= '#8DA696')
+        button = tkinter.Button(master=root, text="Save ", command=self._save, width = 14, bg= '#8DA696')
 
         #root.geometry('250x200+250+200')
-        button.place(x=1550, y=750)
+        location_x = 910
+        location_y = 384
+        button.place(x=location_x+220, y=location_y+100)
 
-        self.scaler_dt_N.place(x=1320, y=800)
-        label.place(x=1275, y=750)
+        self.scaler_N.place(x=location_x, y=location_y+100)
+        label_N.place(x=location_x, y=location_y+80)
 
-        self.scaler_2.place(x=1250, y=650)
-        label_x.place(x=1250, y=600)
+        self.scaler_dt.place(x=location_x+110, y=location_y+100)
+        label_dt.place(x=location_x + 110, y=location_y+80)
 
-        self.scaler_3.place(x=1450, y=650)
-        label_y.place(x=1450, y=600)
+        self.scaler_2.place(x=location_x, y=location_y + 20)
+        label_x.place(x=location_x, y=location_y)
 
-        self.scaler_4.place(x=1650, y=650)
-        label_z.place(x=1650, y=600)
+        self.scaler_3.place(x=location_x+110, y=location_y + 20)
+        label_y.place(x=location_x+110, y=location_y)
+
+        self.scaler_4.place(x=location_x+220, y=location_y+20)
+        label_z.place(x=location_x + 220, y=location_y)
 
         self.updateValue('event')
 
         tkinter.mainloop()
 
+    def update_sc_N(self, event):
+        self.txt_N.set("N: = " + str(self.range_N[int(event)-1]))
 
-    def update_sc(self, event):
-        self.txt_N_dt.set("dt: = " + str(round(self.range_dt[int(event)-1],4)) + "    N: = " + str(self.range_N[int(event)-1]))
+    def update_sc_dt(self, event):
+        self.txt_dt.set("dt: = " + str(round(self.range_dt[int(event)-1],4)))        
 
     def update_scx(self, event):
         self.txt_x.set("x = " + str(np.round(self.range_initial_x[int(event)], 3)))
@@ -134,7 +147,8 @@ class LoratGUI:
 
     def updateValue(self, event):
 
-        value = int(self.scaler_dt_N.get()) - 1
+        value_N = int(self.scaler_N.get()) - 1
+        value_dt = int(self.scaler_dt.get()) -1
         value_2 = int(self.scaler_2.get()) - 1
         value_3 = int(self.scaler_3.get()) - 1
         value_4 = int(self.scaler_4.get()) - 1
@@ -143,8 +157,8 @@ class LoratGUI:
         self.experiment_data["init_x"] = self.range_initial_x[value_2]
         self.experiment_data["init_y"] = self.range_initial_y[value_3]
         self.experiment_data["init_z"] = self.range_initial_z[value_4]
-        self.experiment_data["dt"] = self.range_dt[value]
-        self.experiment_data["N"] = self.range_N[value]
+        self.experiment_data["dt"] = self.range_dt[value_dt]
+        self.experiment_data["N"] = self.range_N[value_N]
         self.experiment_data["beta"] = self.list_beta
         self.experiment_data["sigma"] = self.list_sigma
         self.experiment_data["rho"] = self.list_rho
@@ -154,7 +168,7 @@ class LoratGUI:
 
             x_start = [self.range_initial_x[value_2]]; y_start = [self.range_initial_y[value_3]]; z_start = [self.range_initial_z[value_4]]
             sampling_start_time = timeit.default_timer()
-            x_sampled, y_sampled, z_sampled = euler(x_start, y_start, z_start, sig, bet, r, self.range_dt[value], self.range_N[value])
+            x_sampled, y_sampled, z_sampled = euler(x_start, y_start, z_start, sig, bet, r, self.range_dt[value_dt], self.range_N[value_N])
             sampling_time = timeit.default_timer() - sampling_start_time
             self.experiment_data["data"].append([x_sampled, y_sampled, z_sampled, sampling_time])
 
@@ -185,7 +199,8 @@ class LoratGUI:
         if len(self.file_address):
 
             experiment_name = ';'.join([
-                "N&dt=" + str(self.scaler_dt_N.get()),
+                "N=" + str(self.scaler_N.get()),
+                "dt=" + str(self.scaler_dt.get()),
                 "x=" + str(self.scaler_2.get()),
                 "y=" + str(self.scaler_3.get()),
                 "z=" + str(self.scaler_3.get())
