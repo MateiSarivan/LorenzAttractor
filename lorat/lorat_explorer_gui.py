@@ -81,7 +81,13 @@ class LoratExplorerGUI:
         frame_1.pack(side = LEFT, fill="y")
 
         self.root.after(100, self.get_address)
+
+    def run_gui(self):
         self.root.mainloop()
+
+    def destroy_gui(self):
+        self.root.destroy()
+        return True
 
 
     def _plot(self):

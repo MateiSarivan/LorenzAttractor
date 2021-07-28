@@ -37,9 +37,9 @@ class LoratGUI:
         json_file.close()
 
 
-        root = tkinter.Tk()
-        root.geometry("1366x768")
-        root.wm_title("Embedding in Tk")
+        self.root = tkinter.Tk()
+        self.root.geometry("1366x768")
+        self.root.wm_title("Embedding in Tk")
 
         fig = Figure(figsize=(10, 5), dpi=100)
         self.subplots = []
@@ -56,11 +56,11 @@ class LoratGUI:
             subplot.set_title("(" + r'$\sigma$, ' + r'$\beta$, ' + r'$\rho$)=' + "(" + str(sigma) + ", " + beta + ", " + str(rho) + ")")
 
 
-        self.canvas = FigureCanvasTkAgg(fig, master=root)  # A tk.DrawingArea.
+        self.canvas = FigureCanvasTkAgg(fig, master=self.root)  # A tk.DrawingArea.
         self.canvas.draw()
         self.canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
 
-        toolbar = NavigationToolbar2Tk(self.canvas, root)
+        toolbar = NavigationToolbar2Tk(self.canvas, self.root)
         toolbar.update()
         self.canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
 
@@ -82,8 +82,8 @@ class LoratGUI:
         self.txt_y.set("y = " + str(np.round(self.range_initial_y[0],3)))
         self.txt_z.set("z = " + str(np.round(self.range_initial_z[0],3)))
 
-        self.scaler_dt = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_sc_dt, bg='#BFBFBF')
-        self.scaler_N = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_sc_N, bg='#E3BA7C')
+        self.scaler_dt = tkinter.Scale(master=self.root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_sc_dt, bg='#BFBFBF')
+        self.scaler_N = tkinter.Scale(master=self.root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_sc_N, bg='#E3BA7C')
         
 
         label_N = tkinter.Label(textvariable = self.txt_N, width = 14, bg='#E3BA7C')
@@ -91,9 +91,9 @@ class LoratGUI:
         label_x = tkinter.Label(textvariable = self.txt_x, width = 14, bg='#D02A1E')
         label_y = tkinter.Label(textvariable = self.txt_y, width = 14, bg='#00C753')
         label_z = tkinter.Label(textvariable = self.txt_z, width = 14, bg='#0CB1F2')
-        self.scaler_2 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_scx, bg='#D02A1E')
-        self.scaler_3 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_scy, bg='#00C753')
-        self.scaler_4 = tkinter.Scale(master=root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_scz, bg='#0CB1F2')
+        self.scaler_2 = tkinter.Scale(master=self.root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_scx, bg='#D02A1E')
+        self.scaler_3 = tkinter.Scale(master=self.root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_scy, bg='#00C753')
+        self.scaler_4 = tkinter.Scale(master=self.root, from_=1, to=100, orient=tkinter.HORIZONTAL, width = 20, command = self.update_scz, bg='#0CB1F2')
 
 
         self.scaler_N.bind("<ButtonRelease-1>", self.updateValue)
@@ -103,9 +103,9 @@ class LoratGUI:
         self.scaler_3.bind("<ButtonRelease-1>", self.updateValue)
         self.scaler_4.bind("<ButtonRelease-1>", self.updateValue)
 
-        button = tkinter.Button(master=root, text="Save ", command=self._save, width = 14, bg= '#8DA696')
+        button = tkinter.Button(master=self.root, text="Save ", command=self._save, width = 14, bg= '#8DA696')
 
-        #root.geometry('250x200+250+200')
+        #self.root.geometry('250x200+250+200')
         location_x = 910
         location_y = 384
         button.place(x=location_x+220, y=location_y+100)
@@ -127,7 +127,13 @@ class LoratGUI:
 
         self.updateValue('event')
 
-        tkinter.mainloop()
+    def run_gui(self):
+        
+        self.root.mainloop()
+
+    def destroy_gui(self):
+        self.root.destroy()
+        return True
 
     def update_sc_N(self, event):
         self.txt_N.set("N: = " + str(self.range_N[int(event)-1]))

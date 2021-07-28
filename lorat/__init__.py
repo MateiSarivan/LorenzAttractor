@@ -3,7 +3,9 @@ from lorat.lorat_explorer_gui import LoratExplorerGUI
 
 
 def lorat_simulation():
-    LoratGUI()
+    lorat = LoratGUI()
+    lorat.run_gui()
 
 def lorat_explorer():
-    LoratExplorerGUI()
+    lorat = LoratExplorerGUI()
+    lorat.run_gui()
