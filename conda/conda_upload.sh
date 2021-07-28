@@ -1,6 +1,6 @@
 # Only need to change these two variables
-PKG_NAME=cdp
-USER=zshaheen
+PKG_NAME=lorat
+USER=mateisarivan
 
 OS=$TRAVIS_OS_NAME-64
 mkdir ~/conda-bld
