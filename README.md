@@ -6,6 +6,8 @@
 
 ![PyTest](https://github.com/MateiSarivan/LorenzAttractor/actions/workflows/lorat.yml/badge.svg)
 
+Choosing the right initial conditions, the right sampling step and the right sampling range for generating the beautiful Lorenz Attractor loops can be quite difficult depending on the selected σ, β and ρ constants. We propose hereby a GUI tool that can be used to easily run parametric studies on the lorenz equations.
+
 # Installation
 
 1. 

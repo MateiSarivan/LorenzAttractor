@@ -205,15 +205,15 @@ class LoratGUI:
 
         if len(self.file_address):
 
-            # experiment_name = ';'.join([
-            #     "N=" + str(self.scaler_N.get()),
-            #     "dt=" + str(self.scaler_dt.get()),
-            #     "x=" + str(self.scaler_2.get()),
-            #     "y=" + str(self.scaler_3.get()),
-            #     "z=" + str(self.scaler_3.get())
-            # ])
+            experiment_name = ';'.join([
+                "N=" + str(self.experiment_data["N"]),
+                "dt=" + str(round(self.experiment_data["dt"], 3)),
+                "x=" + str(round(self.experiment_data["init_x"], 3)),
+                "y=" + str(round(self.experiment_data["init_y"], 3)),
+                "z=" + str(round(self.experiment_data["init_z"], 3))
+            ])
 
-            experiment_name = str(uuid.uuid1())[:16]
+            #experiment_name = str(uuid.uuid1())[:16]
             experiment_address = os.path.join(self.file_address, experiment_name)
             if not os.path.exists(experiment_address):
                 os.makedirs(experiment_address)
@@ -224,17 +224,15 @@ class LoratGUI:
             csvw = csv.writer(f, delimiter=",")
             csvw.writerow(["init x", "init y", "init z", "N", "dt", "elapsed_time_total"])
             csvw.writerow([self.experiment_data["init_x"], self.experiment_data["init_y"], self.experiment_data["init_z"], self.experiment_data["N"], self.experiment_data["dt"], self.experiment_data["elapsed_time"]])
-            i = 0
             for (data_set, sigma, beta, rho, beta_string) in zip(self.experiment_data["data"], self.list_sigma, self.list_beta, self.list_rho, self.list_beta_string):
                 csvw.writerow(["beta", "sigma", "rho", "time_elapsed"])
                 csvw.writerow([sigma, beta, rho, data_set[3]])
                 csvw.writerow(["x", "y", "z"])
                 graph_name = ';'.join([experiment_name,
-                    "S=" + str(i),
-                    "B=" + str(i),
-                    "R=" + str(i)
+                    "S=" + str(round(beta, 3)),
+                    "B=" + str(round(sigma, 3)),
+                    "R=" + str(round(rho, 3))
                 ])
-                i += 1
                 graph(data_set[0], data_set[1], data_set[2], self.experiment_data["dt"], int(self.experiment_data["N"]), sigma, beta_string, rho, data_set[3], os.path.join(experiment_address, graph_name + ".png"))
                 graph(data_set[0], data_set[1], data_set[2], self.experiment_data["dt"], int(self.experiment_data["N"]), sigma, beta_string, rho, data_set[3], os.path.join(experiment_address, graph_name + ".pdf"))
                 for (x, y, z) in zip(data_set[0], data_set[1], data_set[2]):
