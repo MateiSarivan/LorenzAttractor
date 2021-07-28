@@ -34,15 +34,12 @@ def generate_pdf(file_address, x_0, y_0, z_0, N, dt, elapsed_time):
     elapsed_time : Float
         Time elapsed for parametric analysis
     """
+    
     canvas = Canvas(file_address, pagesize=A4)
-
-    # Set font to Times New Roman with 12-point size
     canvas.setFont("Times-Roman", 28)
     canvas.drawString(5 * cm, 27 * cm, "Lorenz Attractor Experiment")
     canvas.setFont("Times-Roman", 20)
     canvas.drawString(4.8 * cm, 26 * cm, "Parametric study using the Euler approach")
-    # Draw blue text one inch from the left and ten
-    # inches from the bottom
     canvas.setFont("Times-Roman", 14)
     canvas.drawString(2.5 * cm, (27-3.5) * cm, "Experiment conducted on ")
     day_today = datetime.datetime.now().strftime("%A")
@@ -109,7 +106,4 @@ def generate_pdf(file_address, x_0, y_0, z_0, N, dt, elapsed_time):
     canvas.drawString(2.5 * cm, (27-23.5) * cm, "Total experiment elapsed time: " + str(elapsed_time))
     canvas.drawString(2.5 * cm, (27-24.5) * cm, "For each set of constants, 3D and 2D plots are given below: ")
 
-
-
-    # Save the PDF file
     canvas.save()

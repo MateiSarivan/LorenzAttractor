@@ -36,7 +36,7 @@ def euler(x, y, z, sigma, beta, rho, dt, N):
     beta: Float, optional
         Value of beta. Example values: 8/3 or 13/3.
     rho: Float, optional
-        Value of ro. Example values: 6, 16, or 28.
+        Value of rho. Example values: 6, 16, or 28.
 
     dt: Float, optional
         Iteration step. Example value: 0.01.

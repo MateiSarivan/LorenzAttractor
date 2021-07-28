@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 
-def graph(x, y, z, dt, N, sigma, beta, ro, time_elapsed, file_name = None):
+def graph(x, y, z, dt, N, sigma, beta, rho, time_elapsed, file_name = None):
 
     """
     Generates 3D and 2D plots of the Lorenz attractor.
@@ -24,8 +24,8 @@ def graph(x, y, z, dt, N, sigma, beta, ro, time_elapsed, file_name = None):
         Value of sigma. Example values: 10, or 14.    
     beta: Float
         Value of beta. Example values: 8/3 or 13/3.
-    ro: Float
-        Value of ro. Example values: 6, 16, or 28.
+    rho: Float
+        Value of rho. Example values: 6, 16, or 28.
     time_elapsed: Float
         Time elapsed for solving the Lorenz attractor
     file_name: None, optional
@@ -119,7 +119,7 @@ def graph(x, y, z, dt, N, sigma, beta, ro, time_elapsed, file_name = None):
     
     # Show input data on figure
     graph3D.set_title("(x, y, z) = (" + str(x[0]) + ", " + str(y[0]) + ", " + str(z[0]) + ")\n" + 
-                      "(" +  r"$\sigma$, " + r"$\beta$, "+ r"$\rho$) = (" + str(sigma) + ", " + str(beta) + ", " + str(ro) + ")\n" + 
+                      "(" +  r"$\sigma$, " + r"$\beta$, "+ r"$\rho$) = (" + str(sigma) + ", " + str(beta) + ", " + str(rho) + ")\n" + 
                       "(dt, N) = " + "(" + str(dt) + ", " + str(N) + ")"
                       "\nElapsed coordinates computation time: " + str(time_elapsed))
     

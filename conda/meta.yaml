@@ -1,12 +1,14 @@
 package:
   name: lorat
-  version: 0.0.6
+  version: {{ environ['VERSION'] }}
 
 source:
   path: ../
 
 build:
-  number: 1
+  script_env:
+   - VERSION
+   - CONDA_BLD_PATH
 
 requirements:
   build:

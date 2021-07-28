@@ -62,7 +62,7 @@ After the location of the results has been selected, inside the "LoratResults", 
 While saving, the GUI window will become unresponsive, please be patient.
 
 The folder will contain the following files:
-- .csv file containing data in csv form with the following structure: values of initial conditions (x,y,z), N, dt, and total time of data sampling for each set of constants beta, sigma, rho. On the following lines, for each pair of (beta,sigma,ro) the time elapsed for the experiment and the values of the sampled (x,y,z) at each time step are given with up to 3 decimals. There are in total 5 sets of (x,y,z) for each set of (beta,sigma,ro): WRITE beta, sigma, ro COMBINATIONS.
+- .csv file containing data in csv form with the following structure: values of initial conditions (x,y,z), N, dt, and total time of data sampling for each set of constants beta, sigma, rho. On the following lines, for each pair of (beta,sigma,rho) the time elapsed for the experiment and the values of the sampled (x,y,z) at each time step are given with up to 3 decimals. There are in total 5 sets of (x,y,z) for each set of (beta,sigma,rho): WRITE beta, sigma, rho COMBINATIONS.
 - .numpy file containing the data of the experiment in numpy format. The data is given under a dictionary stucture 
 
         experiment_data={
