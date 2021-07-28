@@ -15,12 +15,7 @@ install:
   - hash -r
   - conda config --set always_yes yes --set changeps1 no
   - conda update -q conda
-  - conda install setuptools
-  - conda install psutil
-  - conda install numpy
-  - conda install matplotlib
-  - conda install -c conda-forge pypdf2
-  - conda install -c conda-forge reportlab
+  - pip install -r requirements.txt
 
 
 script:
