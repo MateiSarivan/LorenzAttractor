@@ -10,7 +10,7 @@ Choosing the right initial conditions, the right sampling step and the right sam
 
 # Installation
 
-1. 
+## Option 1 
 a) In an anaconda terminal execute (you may want to use a virtual environment <see b)>):
 
     >conda install -c mateisarivan -c conda-forge lorat
@@ -21,9 +21,7 @@ b) To cleanly remove the installed package use:
     >conda activate lorat_env
     >conda install -c mateisarivan -c conda-forge lorat
 
-or 
-
-2. 
+## Option 2 
 Clone git repository MateiSarivan/LorenzAttractor using
 
     >git clone https://github.com/MateiSarivan/LorenzAttractor.git
@@ -57,9 +55,9 @@ The user can then navigate to the desired path for saving the results and click 
   <img src="./img/experiment_folder.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
 </p>
 
-After the location of the results has been selected, inside the "LoratResults", a new folder will be created with a random name everytime a new experiment is being saved.
+After the location of the results has been selected, inside the "LoratResults", a new folder will be created with a name that contains the user selected parameters (initial x y z and dt and N) everytime a new experiment is being saved.
 
-While saving, the GUI window will become unresponsive, please be patient.
+**While saving, the GUI window will become unresponsive, please be patient (the process of saving high quality plots takes some time, depending on the platform used).**
 
 The folder will contain the following files:
 - .csv file containing data in csv form with the following structure: values of initial conditions (x,y,z), N, dt, and total time of data sampling for each set of constants beta, sigma, rho. On the following lines, for each pair of (beta,sigma,rho) the time elapsed for the experiment and the values of the sampled (x,y,z) at each time step are given with up to 3 decimals. There are in total 5 sets of (x,y,z) for each set of (beta,sigma,rho): WRITE beta, sigma, rho COMBINATIONS.
@@ -84,12 +82,37 @@ The folder will contain the following files:
 - .pdf the pdf with the results obtained (Parameters, Information regarding operating platform, and 3D and 2D graphs of the Lorenz Attractor for each (sigma, beta, rho), combination).
 - .png images of the 3D and 2D graphs generated for each (sigma,beta,rho) 
 
-For more information on how to use, generate, and save the results please refer to the diagrams below:
+For more information on how to use, generate, and save the results please refer to the diagram below:
 
 
 <p align="center">
   <img src="./img/lorat_simulation_diagram.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
 </p>
+
+# Explore the generated results
+
+If the user want to check the generated results of the user's parametric analysis or another's, they can take advantage of the Lorat Explorer GUI as follows:
+
+Execute in a terminal:
+
+    >lorat-explorer
+
+
+<p align="center">
+  <img src="./img/explorer_folder_pick.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
+</p>
+
+Afterwards select folder containing the results "LoratResults". The experiments have to be inside a "LoratResults", otherwise the applicaton will exit. 
+
+
+
+<p align="center">
+  <img src="./img/lorat_explorer_gui.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
+</p>
+
+The already ran experiments will be visible then the user can select the desired set of data and plot them by clicking the button plot.
+
+For more information on how to explore the results please refer to the diagram below:
 
 <p align="center">
   <img src="./img/lorat_explorer_diagram.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
