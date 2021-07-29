@@ -84,6 +84,18 @@ The folder will contain the following files:
 - .pdf the pdf with the results obtained (Parameters, Information regarding operating platform, and 3D and 2D graphs of the Lorenz Attractor for each (sigma, beta, rho), combination).
 - .png images of the 3D and 2D graphs generated for each (sigma,beta,rho) 
 
+For more information on how to use, generate, and save the results please refer to the diagrams below:
+
+
+<p align="center">
+  <img src="./img/lorat_simulation_diagram.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
+</p>
+
+<p align="center">
+  <img src="./img/lorat_explorer_diagram.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
+</p>
+
+
 # Uninstall
 
 This only works properly if you have used a virtual environemnt. You simply have to delete the environemnt with:
