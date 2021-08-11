@@ -39,6 +39,12 @@ In your terminal execute:
 
     >lorat-simulation
 
+If not working:
+
+    >python
+    >import lorat
+    >lorat.lorat_simulation()
+
 <p align="center">
   <img src="./img/lorat_simulation.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
 </p>
@@ -96,6 +102,12 @@ If the user want to check the generated results of the user's parametric analysi
 Execute in a terminal:
 
     >lorat-explorer
+    
+If not working:
+
+    >python
+    >>>import lorat
+    >>>lorat.lorat_explorer()
 
 
 <p align="center">
@@ -124,5 +136,13 @@ For more information on how to explore the results please refer to the diagram b
 This only works properly if you have used a virtual environemnt. You simply have to delete the environemnt with:
 
     >conda env remove -n lorat_env
+    
+If you have not created an environment:
+
+    >conda remove lorat
+
+If you have installed using the ***setup.py*** file:
+
+    >pip uninstall lorat
 
 All the generated file will remain on your computer
