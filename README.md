@@ -42,8 +42,8 @@ In your terminal execute:
 If not working:
 
     >python
-    >import lorat
-    >lorat.lorat_simulation()
+    >>>import lorat
+    >>>lorat.lorat_simulation()
 
 <p align="center">
   <img src="./img/lorat_simulation.png" alt="Scrennshot of the lorat-simulation GUI" width="738">
