@@ -10,7 +10,7 @@ Choosing the right initial conditions, the right sampling step and the right sam
 
 # Installation
 
-## Option 1  (not working on Linux and OSX at this point)
+## Option 1
 a) In an anaconda terminal execute (you may want to use a virtual environment <see b)>):
 
     >conda install -c mateisarivan -c conda-forge lorat
